@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="le-iptu" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="le-iptu" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="le-iptu" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="le-iptu" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>IPTU</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+        <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+        <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.min.css">
+        <link rel="stylesheet" href="app.css">
+        <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body ng-controller="MainController as Main">
+        <div id="ip-landing">
+            <div class="ip-landing-campaign">
+                <div class="ip-landing-campaign-title">A Prefeitura de Recife errou o cálculo do IPTU em 2013, 2014 e 2015</div>
+                <div class="ip-landing-campaign-text">Se você foi afetado, pode receber até R$7.000,00 de volta</div>
+                <div class="ip-landing-campaign-cta" ng-click="Main.anchor('ip-explanation')">
+                    <a>Será que fui afetado?</a>
+                </div>
+            </div>
+        </div>
+        <div id="ip-explanation" class="container clearfix">
+            <div class="ip-explanation-left">
+                <div class="ip-explanation-paragraph">
+                    <div class="ip-explanation-title">O que aconteceu?</div>
+                    <div class="ip-explanation-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        A aliquid consequuntur cum cupiditate dolorem eaque eos ex fugiat id odit perferendis quas
+                        quisquam quo ratione recusandae rem, repellat sapiente veritatis.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        A aliquid consequuntur cum cupiditate dolorem eaque eos ex fugiat id odit perferendis quas
+                        quisquam quo ratione recusandae rem, repellat sapiente veritatis.
+                    </div>
+                </div>
+                <div class="ip-explanation-paragraph">
+                    <div class="ip-explanation-title">E se eu fui afetado?</div>
+                    <div class="ip-explanation-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        A aliquid consequuntur cum cupiditate dolorem eaque eos ex fugiat id odit perferendis quas
+                        quisquam quo ratione recusandae rem, repellat sapiente veritatis.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        A aliquid consequuntur cum cupiditate dolorem eaque eos ex fugiat id odit perferendis quas
+                        quisquam quo ratione recusandae rem, repellat sapiente veritatis.
+                    </div>
+                </div>
+                <div class="ip-explanation-cta" ng-click="Main.anchor('ip-calculator')">
+                    <a>Verifique se você foi afetado</a>
+                </div>
+            </div>
+            <div class="ip-explanation-right"></div>
+        </div>
+        <div id="ip-calculator">
+            <div class="container">
+                <div class="ip-calculator-title">Calcule quanto você pode restituir</div>
+                <div class="ip-calculator-subtitle">Insira o valor do seu IPTU e seu CEP abaixo para calcularmos quanto você pode receber de volta</div>
+                <div class="ip-calculator-holder clearfix">
+                    <div class="ip-calculator-field">
+                        <div class="ip-calculator-field-title">Quanto custa seu IPTU?</div>
+                        <div class="ip-calculator-range">
+                            <rzslider rz-slider-model="Main.data.form.iptu_price" rz-slider-options="Main.data.sliderOptions"></rzslider>
+                        </div>
+                    </div>
+                    <div class="ip-calculator-field">
+                        <div class="ip-calculator-field-title">Qual seu CEP?</div>
+                        <form name="CepForm"><input type="text" name="cep" class="ip-calculator-text-field" ng-change="Main.getNeighbourhood()" ng-model="Main.data.form.cep" placeholder="Ex: 12345-678" ui-br-cep-mask></form>
+                        <div class="ip-calculator-neighbourhood" ng-if="CepForm.cep.$valid && Main.data.form.address.localidade === 'Recife'">Bairro: {{Main.data.form.address.bairro}}</div>
+                    </div>
+                </div>
+                <div class="ip-calculator-info" ng-show="CepForm.cep.$valid && Main.data.refundValue">
+                    <div class="ip-calculator-info-title">
+                        Você pode restituir até {{Main.data.refundValue | currency:'R$ ':0}}
+                    </div>
+                    <div class="ip-calculator-info-text">
+                        <p>Sim, vale a pena ir atrás de restituir esse valor, e você só precisa entrar com um processo administrativo contra a Prefeitura.</p>
+                        <p>Nós somos especializados em processos administrativos e podemos ajudá-lo a recuperar esse dinheiro.</p>
+                    </div>
+                    <div class="ip-calculator-info-cta">
+                        <a>Quero ganhar até {{Main.data.refundValue | currency:'R$ ':0}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700|PT+Sans">
+            <link rel="stylesheet" href="fonts.css">
+            <script src="bower_components/angularjs-slider/dist/rzslider.js"></script>
+            <script src="bower_components/angular-input-masks/angular-input-masks-standalone.js"></script>
+        </footer>
+    </body>
+</html>
