@@ -7,52 +7,56 @@ angular.module('le-iptu').controller('MainController', ['anchorSmoothScroll', '$
     
     this.data = {
         form: {
-            iptu_price: 800
+            iptu_price: 500,
+            optin: true
         },
         sliderOptions: {
-            floor: 100,
-            ceil: 3000,
-            step: 100,
+            floor: 500,
+            ceil: 5000,
+            step: 500,
             hideLimitLabels: true,
             translate: function(value) {
-                return 'R$ ' + value + (value === 3000 ? ' ou mais' : '');
-            },
-            onChange: function(){
-                _this.calculateRefundValue()
+                if(value === 5000) return 'R$ 5000 ou mais';
+                else if(value === 500) return 'R$ 500 ou menos';
+                return 'R$ ' + value;
             }
-        }
+        },
+        loadingForm: false,
+        formSuccess: false,
+        formError: false
     };
     
     
     this.getNeighbourhood = function(){
-        _this.data.refundValue = null;
         if(_this.data.form.cep){
             $http.get('https://viacep.com.br/ws/' + _this.data.form.cep + '/json/').then(function(response){
                 _this.data.form.address = response.data;
-                _this.calculateRefundValue();
             });
-        }
-    };
-    
-    this.calculateRefundValue = function(){
-        if(_this.data.form.cep){
-            var len = _this.data.form.address.localidade === 'Recife' ? _this.data.form.address.bairro.length : 7;
-            
-            _this.data.refundValue =
-                (_this.data.form.iptu_price * 1.4) +
-                (len * 400);
         }
     };
     
     this.anchor = function(id){
         anchorSmoothScroll.scrollTo(id)
+    };
+    
+    this.sendData = function(){
+        var data = angular.copy(_this.data.form);
+        
+        if(data.address && data.address.localidade === 'Recife') data.neighbourhood = data.address.bairro;
+        
+        _this.data.loadingForm = true;
+        _this.data.formError = false;
+        $http.post('http://iptu-development.us-east-1.elasticbeanstalk.com/client/', data).then(function(response){
+            _this.data.formSuccess = true;
+        }).catch(function(){
+            _this.data.formError = true;
+            _this.data.loadingForm = false;
+        });
     }
 }]);
 
 angular.module('le-iptu').service('anchorSmoothScroll', function(){
-    
     this.scrollTo = function(eID){
-        
         // This scrolling function
         // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript
         
