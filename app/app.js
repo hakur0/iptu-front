@@ -46,7 +46,7 @@ angular.module('le-iptu').controller('MainController', ['anchorSmoothScroll', '$
         
         _this.data.loadingForm = true;
         _this.data.formError = false;
-        $http.post('http://iptu-development.us-east-1.elasticbeanstalk.com/client/', data).then(function(response){
+        $http.post('http://api.ipturecife.com.br/client/', data).then(function(response){
             _this.data.formSuccess = true;
         }).catch(function(){
             _this.data.formError = true;
