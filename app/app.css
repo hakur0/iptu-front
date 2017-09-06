@@ -53,7 +53,7 @@ html{
 }
 
 .ip-landing-campaign {
-    max-width: 45em;
+    max-width: 55em;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -92,10 +92,19 @@ html{
     font-size: 1.2em;
     line-height: 1.35;
     letter-spacing: -0.02em;
+    text-align: left;
+    list-style-type: decimal;
+}
+
+.ip-explanation-text > li{
+    padding-left: 0.5em;
+    margin-bottom: 1.25em;
+    white-space: pre-line;
 }
 
 .ip-explanation-paragraph {
-    margin-bottom: 4em;
+    max-width: 36em;
+    margin: auto auto 4em;
 }
 
 .ip-explanation-cta {
