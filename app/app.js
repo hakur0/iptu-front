@@ -7,8 +7,7 @@ angular.module('le-iptu').controller('MainController', ['anchorSmoothScroll', '$
     
     this.data = {
         form: {
-            iptu_price: 500,
-            optin: true
+            iptu_price: 500
         },
         sliderOptions: {
             floor: 500,

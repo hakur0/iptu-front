@@ -33,7 +33,8 @@
         <div id="ip-modal" ng-cloak ng-if="Main.data.formSuccess">
             <div class="ip-modal-success">
                 <div class="ip-modal-success-text">
-                    Sua solicitação foi enviada com sucesso.
+                    Sua solicitação foi enviada com sucesso. Em breve você será contatado(a) para saber se pode receber
+                    uma restituição.
                 </div>
                 <div class="ip-modal-close" ng-click="Main.data.formSuccess = false">Fechar</div>
             </div>
@@ -41,7 +42,7 @@
         <div id="ip-landing">
             <div class="ip-landing-campaign">
                 <div class="ip-landing-campaign-title">A prefeitura do Recife errou o cálculo do IPTU em 2013, 2014 e 2015</div>
-                <div class="ip-landing-campaign-text">Se você possui um ou mais imóveis em Recife, é possível que você tenha uma quantia considerável a ser recebida</div>
+                <div class="ip-landing-campaign-text">Se você possui um ou mais imóveis em Recife, é possível recuperar até R$7.000,00 de cada imóvel</div>
                 <div class="ip-landing-campaign-cta" ng-click="Main.anchor('ip-explanation')">
                     <a>Será que fui afetado?</a>
                 </div>
@@ -52,20 +53,9 @@
                 <div class="ip-explanation-paragraph">
                     <div class="ip-explanation-title">O que aconteceu?</div>
                     <div class="ip-explanation-text">
-                        Durante os anos de 2013, 2014 e 2015 verificou-se um aumento ilegal do IPTU em algumas áreas da
-                        cidade, gerando assim, direito a reembolso do valor (com correção e juros).
+                        Durante os anos de 2013, 2014 e 2015 a Prefeitura do Recife aumentou ilegalmente diversos IPTUs
+                        em várias áreas da cidade, gerando assim, direito a reembolso do valor com correção e juros.
                     </div>
-                </div>
-                <div class="ip-explanation-paragraph">
-                    <div class="ip-explanation-title">Como recuperar o valor?</div>
-                    <ul class="ip-explanation-text">
-                        <li>Como apenas algumas áreas da cidade foram afetadas, é necessário antes de tudo, verificar se o imóvel encontra-se numa área afetada pelo erro de cálculo.
-
-                            Esse processo pode ser feito por um advogado sem custo para o cliente.</li>
-                        <li>Após essa verificação, é possível entrar com uma ação simples (e sem riscos) para recuperação do valor. O procedimento é rápido e não requer que o cliente vá em audiências ou tribunais.</li>
-                        <li>Basta preencher o formulário no fim dessa página para que um advogado entre em contato com você e dê andamento ao processo.</li>
-                        <li>Caso você tenha um imóvel numa área afetada, você receberá o valor devido corrigido e com juros. Caso seu imóvel não esteja em uma área afetada, não há custo ou risco para quem faz a verificação.</li>
-                    </ul>
                 </div>
                 <div class="ip-explanation-cta" ng-click="Main.anchor('ip-calculator')">
                     <a>Verifique se você foi afetado</a>
@@ -75,7 +65,7 @@
         </div>
         <div id="ip-calculator">
             <div class="container">
-                <div class="ip-calculator-title">Verifique se você tem direito ao reembolso</div>
+                <div class="ip-calculator-title">Verifique se o seu imóvel tem direito ao reembolso</div>
                 <div class="ip-calculator-subtitle">Insira o valor do seu IPTU e seu CEP abaixo para calcularmos quanto você pode receber de volta</div>
                 <form ng-submit="Main.sendData()">
                     <div class="ip-calculator-holder clearfix">
@@ -92,19 +82,7 @@
                         <div class="ip-calculator-field">
                             <div class="ip-calculator-field-title">Dados para contato</div>
                             <input class="ip-calculator-info-text-field" ng-model="Main.data.form.name" placeholder="Nome e sobrenome" required>
-                            <input type="email" class="ip-calculator-info-text-field" ng-model="Main.data.form.email" placeholder="Endereço de email" required>
-                            <input class="ip-calculator-info-text-field" ng-model="Main.data.form.phone_number" placeholder="Telefone com DDD" ui-br-phone-number required>
-                        </div>
-                        <div class="ip-calculator-field clearfix">
-                            <div class="ip-calculator-field-title">Deseja que um advogado entre em contato com você?</div>
-                            <div class="ip-calculator-radio-holder">
-                                <input id="ip-calculator-radio-no" name="ip-calculator-radio" type="radio" class="ip-calculator-radio-field" ng-model="Main.data.form.optin" ng-value="false" required>
-                                <label for="ip-calculator-radio-no" class="ip-calculator-radio-label">Não</label>
-                            </div>
-                            <div class="ip-calculator-radio-holder">
-                                <input id="ip-calculator-radio-yes" name="ip-calculator-radio" type="radio" class="ip-calculator-radio-field" ng-model="Main.data.form.optin" ng-value="true" required>
-                                <label for="ip-calculator-radio-yes" class="ip-calculator-radio-label">Sim</label>
-                            </div>
+                            <input class="ip-calculator-info-text-field" ng-model="Main.data.form.email_phone" placeholder="Email ou telefone" required>
                         </div>
                         <div ng-if="Main.data.formError" class="ip-calculator-error">Algo deu errado ao enviar sua solicitação. Por favor, verifique se todos os campos estão preenchidos corretamente e tente novamente.</div>
                         <input type="submit" class="ip-calculator-submit" ng-class="{'loading': Main.data.loadingForm}" value="Solicitar verificação">
